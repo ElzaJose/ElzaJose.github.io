@@ -1,5 +1,5 @@
-<svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
-  <!-- Define styles for the buttons -->
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define styles for the buttons and content -->
   <style>
     .button {
       cursor: pointer;
@@ -10,6 +10,15 @@
     .button:hover {
       fill: deepskyblue;
     }
+    .content {
+      font-family: monospace;
+      font-size: 16px;
+      fill: black;
+      display: none;
+    }
+    .content.active {
+      display: block;
+    }
     .label {
       font-family: Arial, sans-serif;
       font-size: 20px;
@@ -17,19 +26,71 @@
     }
   </style>
 
-  <!-- Buttons as links -->
-  <a xlink:href="https://gist.github.com/yourusername/js-code" target="_blank">
-    <rect x="20" y="20" width="150" height="50" class="button"/>
-    <text x="30" y="50" class="label">JS</text>
-  </a>
+  <!-- Dropdown-like buttons for tab selection -->
+  <rect x="20" y="20" width="150" height="50" class="button" id="btn-curl"/>
+  <text x="30" y="50" class="label">CURL</text>
 
-  <a xlink:href="https://gist.github.com/yourusername/cpp-code" target="_blank">
-    <rect x="20" y="90" width="150" height="50" class="button"/>
-    <text x="30" y="120" class="label">CPP</text>
-  </a>
+  <rect x="20" y="90" width="150" height="50" class="button" id="btn-js"/>
+  <text x="30" y="120" class="label">JavaScript</text>
 
-  <a xlink:href="https://gist.github.com/yourusername/curl-code" target="_blank">
-    <rect x="20" y="160" width="150" height="50" class="button"/>
-    <text x="30" y="190" class="label">CURL</text>
-  </a>
+  <rect x="20" y="160" width="150" height="50" class="button" id="btn-cpp"/>
+  <text x="30" y="190" class="label">CPP</text>
+
+  <!-- Code samples using <foreignObject> -->
+  <foreignObject x="200" y="20" width="380" height="360">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: monospace; font-size: 16px;">
+      <div id="content-curl" class="content">
+        <pre><code>{
+    "jsonrpc": "2.0",
+    "id": 42,
+    "method": "org.rdk.UserSettings.GetAudioDescription"
+}
+</code></pre>
+      </div>
+      <div id="content-js" class="content">
+        <pre><code>
+const params = {
+  videoDisplay: 'HDMI0'
+}
+thunderJS.DisplaySettings.getSupportedResolutions(params)
+</code></pre>
+      </div>
+      <div id="content-cpp" class="content">
+        <pre><code>
+void getSystemVersions(std::string methodName, JSONRPC::LinkType<Core::JSON::IElement> *remoteObject)
+{
+    printf("[%llu] Inside (%s)\n", TimeStamp(), __FUNCTION__);
+    JsonObject parameters, response;
+    std::string result;
+    if (invokeJSONRPC(remoteObject, methodName, parameters, response)) {
+        response.ToString(result);
+        printf("\nResponse: '%s'\n", result.c_str());
+    }
+}
+</code></pre>
+      </div>
+    </div>
+  </foreignObject>
+
+  <!-- JavaScript for interactivity -->
+  <script type="text/javascript">
+    <![CDATA[
+    // Add event listeners for buttons
+    document.getElementById('btn-curl').addEventListener('click', function() {
+      document.getElementById('content-curl').classList.add('active');
+      document.getElementById('content-js').classList.remove('active');
+      document.getElementById('content-cpp').classList.remove('active');
+    });
+    document.getElementById('btn-js').addEventListener('click', function() {
+      document.getElementById('content-js').classList.add('active');
+      document.getElementById('content-curl').classList.remove('active');
+      document.getElementById('content-cpp').classList.remove('active');
+    });
+    document.getElementById('btn-cpp').addEventListener('click', function() {
+      document.getElementById('content-cpp').classList.add('active');
+      document.getElementById('content-curl').classList.remove('active');
+      document.getElementById('content-js').classList.remove('active');
+    });
+    ]]>
+  </script>
 </svg>
