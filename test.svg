@@ -1,0 +1,35 @@
+<svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define styles for the buttons -->
+  <style>
+    .button {
+      cursor: pointer;
+      fill: lightblue;
+      stroke: black;
+      stroke-width: 2;
+    }
+    .button:hover {
+      fill: deepskyblue;
+    }
+    .label {
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      fill: black;
+    }
+  </style>
+
+  <!-- Buttons as links -->
+  <a xlink:href="https://gist.github.com/yourusername/js-code" target="_blank">
+    <rect x="20" y="20" width="150" height="50" class="button"/>
+    <text x="30" y="50" class="label">JS</text>
+  </a>
+
+  <a xlink:href="https://gist.github.com/yourusername/cpp-code" target="_blank">
+    <rect x="20" y="90" width="150" height="50" class="button"/>
+    <text x="30" y="120" class="label">CPP</text>
+  </a>
+
+  <a xlink:href="https://gist.github.com/yourusername/curl-code" target="_blank">
+    <rect x="20" y="160" width="150" height="50" class="button"/>
+    <text x="30" y="190" class="label">CURL</text>
+  </a>
+</svg>
